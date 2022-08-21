@@ -9,7 +9,7 @@ jobs:
             - uses: actions/setup-node@v1
               with:
                   node-version: 16.9.1
-            - run: npm ci
+            - run: npm run setup
             - run: npm run check
             - uses: actions/upload-artifact@v2
               with:
