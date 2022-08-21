@@ -14,7 +14,7 @@ npm install playwright-xpath
 
 ```ts
 import { selectors } from 'playwright'
-import xpath2 from 'playwright-xpath2'
+import xpath2 from 'playwright-xpath'
 
 selectors.register('xpath2', xpath2)
 ;(async () => {
