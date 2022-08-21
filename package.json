@@ -7,7 +7,7 @@
   ],
   "main": "dist/node/main.js",
   "scripts": {
-    "test": "tsc -p tests/tsconfig.json && npm run build && playwright test",
+    "test": "npm run build && tsc -p tests/tsconfig.json && playwright test",
     "lint:check": "eslint . --ext .ts",
     "lint:fix": "npm run lint:check -- --fix",
     "format:check": "prettier --check .",
@@ -17,7 +17,7 @@
     "build:node": "tsc -p src/node/tsconfig.json",
     "debug": "npm run _esbuild -- --format=esm --outdir=debug/dist/browser --servedir=debug",
     "build": "rimraf ./dist && npm run build:browser && npm run build:node",
-    "check": "npm run lint:check && npm run format:check && npm run test"
+    "check": "npm run test && npm run lint:check && npm run format:check"
   },
   "keywords": [],
   "author": "detachhead",
