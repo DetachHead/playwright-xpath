@@ -1,17 +1,14 @@
-import xpath from 'xpath2.js'
+import { evaluateXPathToFirstNode, evaluateXPathToNodes, Options } from 'fontoxpath'
 
-const staticContext = xpath.createStaticContext()
-staticContext.defaultFunctionNamespace = 'http://www.w3.org/2005/xpath-functions'
-staticContext.defaultElementNamespace = '*'
-
-const queryAll = (root: typeof window, selector: string): Element[] => {
-    const dynamicContext = xpath.createDynamicContext(staticContext, root)
-    const expression = xpath.compile(selector, staticContext)
-    return xpath.execute(expression, dynamicContext)
+const options: Options = {
+    // needed for firefox for some reason
+    namespaceResolver: () => 'http://www.w3.org/1999/xhtml',
 }
 
 export default {
-    query: (root: typeof window, selector: string): Element | undefined =>
-        queryAll(root, selector)[0],
-    queryAll,
+    queryAll: (root: Element | Document, selector: string): Element[] =>
+        evaluateXPathToNodes(selector, root, undefined, undefined, options),
+    query: (root: Element | Document, selector: string): Element | undefined =>
+        evaluateXPathToFirstNode<Element>(selector, root, undefined, undefined, options) ??
+        undefined,
 }
