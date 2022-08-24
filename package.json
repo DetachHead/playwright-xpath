@@ -29,7 +29,6 @@
   },
   "devDependencies": {
     "@detachhead/eslint-config": "^0.0.16",
-    "@detachhead/ts-helpers": "^12.0.0",
     "@playwright/test": "^1.25.0",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "@types/eslint": "^8.4.6",
