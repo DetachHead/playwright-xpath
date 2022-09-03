@@ -21,4 +21,16 @@ test('xpath 2 function', async ({ page }) => {
     await page.click("xpath3=//button[starts-with(., 'Click')]")
 })
 
+test.describe('svg', () => {
+    test('svg', async ({ page }) => {
+        await page.setContent('<svg><text>asdf</text></svg>')
+        await page.waitForSelector('xpath3=//svg')
+    })
+
+    test('svg inner element', async ({ page }) => {
+        await page.setContent('<svg><text>asdf</text></svg>')
+        await page.waitForSelector('xpath3=//svg/text')
+    })
+})
+
 // TODO: xpath 3 tests
