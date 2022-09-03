@@ -1,8 +1,8 @@
 import { evaluateXPathToFirstNode, evaluateXPathToNodes, Options } from 'fontoxpath'
 
 const options: Options = {
-    // needed for firefox for some reason
-    namespaceResolver: () => 'http://www.w3.org/1999/xhtml',
+    // https://github.com/FontoXML/fontoxpath/issues/525#issuecomment-1235325777
+    namespaceResolver: (prefix) => (prefix ? null : 'http://www.w3.org/1999/xhtml'),
 }
 
 export default {
