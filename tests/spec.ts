@@ -24,12 +24,12 @@ test('xpath 2 function', async ({ page }) => {
 test.describe('svg', () => {
     test('svg', async ({ page }) => {
         await page.setContent('<svg><text>asdf</text></svg>')
-        await page.waitForSelector('xpath3=//svg')
+        await page.waitForSelector('xpath3=//svg:svg')
     })
 
     test('svg inner element', async ({ page }) => {
         await page.setContent('<svg><text>asdf</text></svg>')
-        await page.waitForSelector('xpath3=//svg/text')
+        await page.waitForSelector('xpath3=//svg:svg/svg:text')
     })
 })
 
