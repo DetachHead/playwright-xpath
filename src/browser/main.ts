@@ -2,7 +2,18 @@ import { evaluateXPathToFirstNode, evaluateXPathToNodes, Options } from 'fontoxp
 
 const options: Options = {
     // https://github.com/FontoXML/fontoxpath/issues/525#issuecomment-1235325777
-    namespaceResolver: (prefix) => (prefix ? null : 'http://www.w3.org/1999/xhtml'),
+    namespaceResolver: (prefix) => {
+        switch (prefix) {
+            case 'svg':
+                return 'http://www.w3.org/2000/svg'
+            case '':
+                return 'http://www.w3.org/1999/xhtml'
+            default:
+                throw new Error(
+                    `Unused prefix used in XPath: ${prefix}. Only the 'svg' and the default namespace are registered.`,
+                )
+        }
+    },
 }
 
 export default {
