@@ -4,8 +4,7 @@
     "prettier.configPath": ".prettierrc.json",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true,
-        "source.organizeImports": true
+        "source.fixAll.eslint": "always"
     },
     "eslint.validate": ["typescript"],
     "git.allowForcePush": true,
@@ -16,7 +15,16 @@
     "git.suggestSmartCommit": false,
     "git.supportCancellation": true,
     "git.useCommitInputAsStashMessage": true,
+    "git.pullBeforeCheckout": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "files.eol": "\n",
-    "typescript.enablePromptUseWorkspaceTsdk": true
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "git.useEditorAsCommitInput": false,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.unicodeHighlight.nonBasicASCII": true,
+    "yaml.schemas": {
+        // https://github.com/redhat-developer/vscode-yaml/issues/1022
+        "https://json.schemastore.org/github-issue-config.json": "./.github/ISSUE_TEMPLATE/config.yml"
+    },
+    "chat.commandCenter.enabled": false
 }
