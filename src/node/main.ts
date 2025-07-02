@@ -3,12 +3,20 @@ import { join } from 'path'
 import { selectors } from 'playwright'
 
 const selectorEngine: Parameters<typeof selectors.register>[1] = {
-    // https://github.com/microsoft/playwright/issues/16705
+    // https://github.com/microsoft/playwright/issues/36448
     content: `(() => {
-        if (typeof module === 'undefined') {
+        const useFakeModule = typeof module === 'undefined'
+        if (useFakeModule) {
             window.module = {exports: {}};
-        }    
-        ${readFileSync(join(__dirname, '../browser/main.js'), 'utf8')};
+        }
+        try {
+            ${readFileSync(join(__dirname, '../browser/main.js'), 'utf8')};
+            return module.exports.default
+        } finally {
+            if (useFakeModule) {
+                delete module
+            }
+        }
         return module.exports.default
     })()`,
 }
