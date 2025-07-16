@@ -1,17 +1,22 @@
-/** @type {import('eslint').Linter.ParserOptions} */
+/**
+ * @import {Linter} from 'eslint'
+ */
+
+/** @type {Linter.ParserOptions} */
 const parserOptions = {
     tsconfigRootDir: __dirname,
     ecmaVersion: 'latest',
     project: ['./tsconfig.json'],
 }
 
-/** @type {import('eslint').Linter.Config} */
+/** @type {Linter.Config} */
 const config = {
     extends: ['@detachhead/eslint-config'],
     parserOptions,
     rules: {
         // typescript-eslint enables this for typescript files only, but the js config files can benefit from it too because we aren't targeting an ancient node version
         'no-var': 'error',
+        '@typescript-eslint/explicit-module-boundary-types': 'off', // not a public api
         'import/no-extraneous-dependencies': [
             'error',
             {
@@ -25,10 +30,18 @@ const config = {
         ],
     },
     overrides: [
-        {
-            files: ['src/browser/**/*.ts'],
-            parserOptions: { ...parserOptions, project: ['./src/browser/tsconfig.json'] },
-        },
+        ...['src/common', 'src/browser', 'src/node', 'tests'].map(
+            (path) =>
+                /** @type {const} @satisfies {Linter.ConfigOverride<Linter.RulesRecord>} */ ({
+                    files: [`${path}/**/*.ts`],
+                    parserOptions: { ...parserOptions, project: [`./${path}/tsconfig.json`] },
+                    rules: {
+                        '@typescript-eslint/explicit-module-boundary-types': path.startsWith('src/')
+                            ? 'error'
+                            : 'off', // not a public api
+                    },
+                }),
+        ),
         {
             files: ['.eslintrc.cjs'],
             parserOptions,
