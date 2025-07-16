@@ -28,13 +28,14 @@
     "url": "https://github.com/DetachHead/playwright-xpath.git"
   },
   "devDependencies": {
-    "@detachhead/eslint-config": ">=1",
+    "@detachhead/eslint-config": ">=1.5.3",
     "@playwright/test": "1.53.1",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "@types/eslint": "^8.4.6",
     "@types/node": "^24",
     "esbuild": "^0.15.5",
     "fontoxpath": "^3.27.0",
+    "is-ci": "^4.1.0",
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
     "typescript": ">=5"
